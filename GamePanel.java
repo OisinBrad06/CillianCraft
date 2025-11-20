@@ -14,12 +14,14 @@ public class GamePanel extends JPanel
     final int screenWidth = tileSize * maxScreenCol; // 768 pixels
     final int screenHeight = tileSize * maxScreenRow;
     public BufferedImage sprite;
+    int charX = 100;
+    int charY = 100;
     public GamePanel()
     {
         this.setPreferredSize(new Dimension(screenWidth,screenHeight));
         try
         {
-            sprite = ImageIO.read(new File("sprite.PNG"));
+            sprite = ImageIO.read(new File("main/sprite.PNG"));
         }
         catch (IOException e)
         {
@@ -31,7 +33,7 @@ public class GamePanel extends JPanel
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         if (sprite != null) {
-            g.drawImage(sprite, 100, 100, null);
+            g.drawImage(sprite, charX, charY, null);
         }
     }
 }
