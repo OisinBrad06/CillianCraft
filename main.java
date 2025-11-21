@@ -17,46 +17,74 @@ public class main
         window.pack();
         window.setVisible(true);
         window.setIconImage(gamePanel.sprite);
-
-        panel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
-             .put(KeyStroke.getKeyStroke("W"), "WPressed");
-             panel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
-             .put(KeyStroke.getKeyStroke("A"), "APressed");
-             panel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
-             .put(KeyStroke.getKeyStroke("S"), "SPressed");
-             panel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
-             .put(KeyStroke.getKeyStroke("D"), "DPressed");
-
-        panel.getActionMap().put("WPressed", new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                gamePanel.charY = gamePanel.charY - 4;
-                gamePanel.repaint();
-            }
-        });
-        panel.getActionMap().put("APressed", new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("Space was pressed!");
-                gamePanel.charX = gamePanel.charX - 4;
-                gamePanel.repaint();
-            }
-        });
-        panel.getActionMap().put("SPressed", new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                gamePanel.charY = gamePanel.charY + 4;
-                gamePanel.repaint();
-            }
-        });
-        panel.getActionMap().put("DPressed", new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                gamePanel.charX = gamePanel.charX + 4;
-                gamePanel.repaint();
-            }
-        });
-
-
+        keybindSetup(gamePanel, panel);
     }
+        public static void keybindSetup(GamePanel gamePanel, JPanel panel)
+        {
+            panel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
+             .put(KeyStroke.getKeyStroke("pressed W"), "WPressed");
+              panel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
+             .put(KeyStroke.getKeyStroke("released W"), "WReleased");
+             panel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
+             .put(KeyStroke.getKeyStroke("pressed A"), "APressed");
+             panel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
+             .put(KeyStroke.getKeyStroke("released A"), "AReleased");
+             panel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
+             .put(KeyStroke.getKeyStroke("pressed S"), "SPressed");
+              panel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
+             .put(KeyStroke.getKeyStroke("released S"), "SReleased");
+             panel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
+             .put(KeyStroke.getKeyStroke("pressed D"), "DPressed");
+             panel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
+             .put(KeyStroke.getKeyStroke("released D"), "DReleased");
+
+            panel.getActionMap().put("WPressed", new AbstractAction() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    gamePanel.upPressed = true;
+                }
+            });
+            panel.getActionMap().put("APressed", new AbstractAction() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    gamePanel.leftPressed = true;
+                }
+            });
+            panel.getActionMap().put("SPressed", new AbstractAction() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    gamePanel.downPressed = true;
+                }
+            });
+            panel.getActionMap().put("DPressed", new AbstractAction() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    gamePanel.rightPressed = true;
+                }
+            });
+            panel.getActionMap().put("WReleased", new AbstractAction() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    gamePanel.upPressed = false;
+                }
+            });
+           panel.getActionMap().put("AReleased", new AbstractAction() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    gamePanel.leftPressed = false;
+                }
+            });
+            panel.getActionMap().put("SReleased", new AbstractAction() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    gamePanel.downPressed = false;
+                }
+            });
+            panel.getActionMap().put("DReleased", new AbstractAction() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    gamePanel.rightPressed = false;
+                }
+            });
+        }
 }

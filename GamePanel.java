@@ -14,6 +14,7 @@ public class GamePanel extends JPanel
     final int screenWidth = tileSize * maxScreenCol; // 768 pixels
     final int screenHeight = tileSize * maxScreenRow;
     public BufferedImage sprite;
+    boolean upPressed, downPressed, leftPressed, rightPressed;
     int charX = 100;
     int charY = 100;
     public GamePanel()
@@ -26,9 +27,19 @@ public class GamePanel extends JPanel
         catch (IOException e)
         {
         }
-        //this.setBackground(Color.black);
         this.setDoubleBuffered(true);
+        new Timer(16, e -> updateGame()).start();
     }
+     private void updateGame() {
+        int speed = 4;
+        if (upPressed) charY -= speed;
+        if (downPressed) charY += speed;
+        if (leftPressed) charX -= speed;
+        if (rightPressed) charX += speed;
+
+        repaint();
+    }
+    
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
